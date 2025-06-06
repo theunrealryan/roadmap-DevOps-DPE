@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap Interativo de Estágio DevOps 🚀</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f9; /* Um cinza azulado mais suave */
+        }
+        .collapsible-header {
+            cursor: pointer;
+            padding: 0.85rem 1.2rem;
+            background-color: #e0e7ff; /* Tailwind indigo-100 (um pouco mais formal) */
+            border-radius: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .collapsible-header:hover {
+            background-color: #c7d2fe; /* Tailwind indigo-200 */
+            transform: translateY(-1px);
+        }
+        .collapsible-header h2, .collapsible-header h3 {
+            color: #3730a3; /* Tailwind indigo-800 */
+        }
+        .collapsible-content {
+            display: none;
+            padding: 1.2rem;
+            border: 1px solid #c7d2fe; /* Tailwind indigo-200 */
+            border-top: none;
+            border-radius: 0 0 0.5rem 0.5rem;
+            background-color: #ffffff;
+            animation: fadeIn 0.4s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .collapsible-content.open {
+            display: block;
+        }
+        .checkbox-item label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.25rem 0;
+            transition: color 0.2s ease;
+            color: #374151; /* Tailwind gray-700 */
+        }
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 0.75rem;
+            height: 1.05rem;
+            width: 1.05rem;
+            accent-color: #4f46e5; /* Tailwind indigo-600 */
+            cursor: pointer;
+        }
+        .checkbox-item input[type="checkbox"]:checked + span {
+            text-decoration: line-through;
+            color: #047857; /* Tailwind emerald-700 */
+        }
+         .checkbox-item label:hover span { /* Efeito hover no texto do label */
+            color: #4f46e5; /* Tailwind indigo-600 */
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: #eef2ff; /* Tailwind indigo-50 */
+            border-radius: 0.5rem;
+            overflow: hidden;
+            height: 1.5rem;
+            margin-bottom: 0.75rem;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+        }
+        .progress-bar {
+            background-color: #6366f1; /* Tailwind indigo-500 */
+            height: 100%;
+            text-align: center;
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 500;
+            line-height: 1.5rem;
+            transition: width 0.4s ease-in-out;
+        }
+        .arrow-icon {
+            transition: transform 0.3s ease;
+            font-size: 1.1em;
+            color: #4338ca; /* Tailwind indigo-700 */
+        }
+        .arrow-icon.rotate-90 {
+            transform: rotate(90deg);
+        }
+        ul {
+            list-style-type: disc; /* Marcador padrão */
+            margin-left: 1.75rem; /* Ajuste para marcador padrão */
+        }
+        li {
+            margin-bottom: 0.3rem;
+            padding-left: 0.1rem;
+        }
+        h4 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 0.6rem;
+            color: #312e81; /* Tailwind indigo-700 */
+        }
+        .challenge-details ul {
+            list-style-type: circle; /* Marcador diferente para sub-itens */
+            margin-left: 1.25rem;
+        }
+        .challenge-details ul li {
+            margin-bottom: 0.2rem;
+            padding-left: 0.1rem;
+        }
+        .main-title {
+             background: linear-gradient(to right, #4f46e5, #6366f1); /* Gradiente Indigo */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding-bottom: 0.25rem;
+        }
+        .text-muted {
+            color: #4b5563; /* Tailwind gray-600 */
+        }
+        .text-description {
+            color: #374151; /* Tailwind gray-700 */
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto bg-white p-6 md:p-8 rounded-xl shadow-xl animate__animated animate__fadeIn">
+        <h1 class="text-3xl md:text-4xl font-bold mb-3 text-center main-title">Roadmap de Estágio DevOps 🚀</h1>
+        <p class="text-muted mb-8 text-center text-base md:text-lg">Acompanhe seu desenvolvimento e aprendizado na área de DevOps.</p>
+
+        <div class="mb-10">
+            <h2 class="text-xl md:text-2xl font-semibold text-indigo-700 mb-3">Progresso Geral do Roadmap:</h2>
+            <div class="progress-bar-container">
+                <div id="overall-progress-bar" class="progress-bar">0%</div>
+            </div>
+        </div>
+
+        <div id="roadmap-phases">
+            <div class="phase-container mb-8" data-phase-id="0">
+                <div class="collapsible-header">
+                    <h2 class="text-xl font-semibold">Fase 0: Introdução ao Troubleshooting 💡</h2>
+                    <span class="arrow-icon">&#9654;</span>
+                </div>
+                <div class="collapsible-content">
+                    <p class="mb-3 text-description"><strong>Importância:</strong> Antes de aprofundar nas tecnologias, é crucial entender que a capacidade de diagnosticar e resolver problemas (troubleshooting) é uma habilidade central em DevOps. Sistemas são complexos e falhas ocorrem. Abordar problemas metodicamente, compreender os sintomas antes de intervir e aprender com cada incidente são práticas essenciais.</p>
+                    <h4>Princípios Fundamentais para Resolução de Problemas:</h4>
+                    <ul>
+                        <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-0-item-0"><span>Observar e Compreender: Qual o problema exato? Qual o comportamento esperado?</span></label></li>
+                        <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-0-item-1"><span>Verificar, Não Assumir: Questione suas premissas.</span></label></li>
+                        <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-0-item-2"><span>Coletar Evidências: Logs, métricas, mensagens de erro.</span></label></li>
+                        <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-0-item-3"><span>Isolar o Problema: Reduza o escopo da investigação.</span></label></li>
+                        <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-0-item-4"><span>Realizar Uma Mudança por Vez: Observe o impacto de cada alteração.</span></label></li>
+                        <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-0-item-5"><span>Pensar Sistematicamente: Utilize uma abordagem lógica.</span></label></li>
+                        <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-0-item-6"><span>Documentar Descobertas e Soluções: Crie uma base de conhecimento.</span></label></li>
+                        <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-0-item-7"><span>Perguntar "Por quê?" Repetidamente: Para encontrar a causa raiz.</span></label></li>
+                        <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-0-item-8"><span>Saber Quando Pedir Ajuda: Colaboração é fundamental.</span></label></li>
+                    </ul>
+                    <h4>Exercício Introdutório:</h4>
+                    <ul>
+                        <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-0-challenge-0"><span>Reflexão sobre Resolução de Problema Anterior: Descreva um problema técnico que você enfrentou, como o abordou e o que faria diferente aplicando os princípios acima. Discuta com seu mentor.</span></label></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="phase-container mb-8" data-phase-id="1">
+                <div class="collapsible-header">
+                    <h2 class="text-xl font-semibold">Fase 1: Fundamentos Essenciais 🧱</h2>
+                    <span class="arrow-icon">&#9654;</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="progress-bar-container">
+                        <div id="phase-1-progress-bar" class="progress-bar">0%</div>
+                    </div>
+                    
+                    <div class="topic-container mt-5" data-topic-id="1.1">
+                        <div class="collapsible-header bg-indigo-50 hover:bg-indigo-100">
+                            <h3 class="text-lg font-medium">1. Linux e Shell Scripting 🐧</h3>
+                            <span class="arrow-icon text-indigo-600 text-sm">&#9654;</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p class="mb-2 text-sm text-muted"><strong>Importância:</strong> A maioria dos servidores opera em Linux. Dominar o sistema operacional, a linha de comando e scripts básicos é vital para automação e troubleshooting.</p>
+                            <h4>Tópicos de Estudo:</h4>
+                            <ul>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.1-item-0"><span>Visão Geral de Distribuições Linux (Debian, CentOS/RHEL, Ubuntu)</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.1-item-1"><span>Estrutura do Sistema de Arquivos Linux (FHS)</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.1-item-2"><span>Comandos Essenciais: Navegação (`ls`, `cd`, `pwd`), Manipulação de Arquivos (`touch`, `cat`, `cp`, `mv`, `rm`, `mkdir`), Permissões (`chmod`, `chown`), Gerenciamento de Processos (`ps`, `top`, `kill`, `systemctl`), Gerenciamento de Usuários (`useradd`, `passwd`), Redes (`ip a`, `ping`, `ss`)</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.1-item-3"><span>Shell Scripting (Bash): Variáveis, condicionais (`if/else`), loops (`for/while`), funções, leitura de input, substituição de comando, pipes (`|`), redirecionamentos (`>`, `>>`), processamento de texto (`grep`, `awk`, `sed`)</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.1-item-4"><span>Gerenciamento de Pacotes (`apt` para Debian/Ubuntu, `yum`/`dnf` para CentOS/RHEL)</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.1-item-5"><span>SSH e Gerenciamento de Chaves</span></label></li>
+                            </ul>
+                            <h4>Desafios Práticos:</h4>
+                            <ul>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.1-challenge-0"><span>Desenvolver script para configuração inicial de servidor (atualização, instalação de web server, criação de usuário, firewall básico).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.1-challenge-1"><span>Criar script para analisar logs (ex: contar erros 404 em log de acesso Nginx).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.1-challenge-2"><span>Desenvolver script para backup de diretório em formato `.tar.gz` com timestamp.</span></label></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                     <div class="topic-container mt-5" data-topic-id="1.2">
+                        <div class="collapsible-header bg-indigo-50 hover:bg-indigo-100">
+                            <h3 class="text-lg font-medium">2. Fundamentos de Rede 🌐</h3>
+                             <span class="arrow-icon text-indigo-600 text-sm">&#9654;</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p class="mb-2 text-sm text-muted"><strong>Importância:</strong> DevOps lida com serviços em rede. Compreender os conceitos de rede é crucial para configuração e diagnóstico.</p>
+                            <h4>Tópicos de Estudo:</h4>
+                            <ul>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.2-item-0"><span>Modelo OSI e TCP/IP: Camadas e suas funções.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.2-item-1"><span>Endereçamento IP: IPv4, Sub-redes, Notação CIDR.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.2-item-2"><span>DNS: Resolução de nomes, tipos de registros (`A`, `CNAME`, `MX`).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.2-item-3"><span>Protocolos Comuns: HTTP/HTTPS, TCP, UDP, ICMP, SSH, FTP.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.2-item-4"><span>Portas e Sockets: Como serviços escutam conexões.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.2-item-5"><span>Firewalls: Conceitos básicos (`ufw`, `firewalld`), introdução a OPNsense/pfSense.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.2-item-6"><span>Balanceamento de Carga: Conceitos e tipos (Round Robin, Least Connections).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.2-item-7"><span>VPNs: Propósito e funcionamento básico.</span></label></li>
+                            </ul>
+                            <h4>Desafios Práticos:</h4>
+                            <ul>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.2-challenge-0"><span>Desenhar diagrama de rede simples (servidor web, BD, usuário).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.2-challenge-1"><span>Utilizar `dig` ou `nslookup` para investigar registros DNS de um domínio.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.2-challenge-2"><span>Configurar firewall básico em VM Linux (permitir SSH de IP específico, HTTP/S de qualquer origem).</span></label></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="topic-container mt-5" data-topic-id="1.3">
+                        <div class="collapsible-header bg-indigo-50 hover:bg-indigo-100">
+                            <h3 class="text-lg font-medium">3. Conceitos de Virtualização (vSphere e Laboratórios Locais) 🖥️</h3>
+                             <span class="arrow-icon text-indigo-600 text-sm">&#9654;</span>
+                        </div>
+                        <div class="collapsible-content">
+                             <p class="mb-2 text-sm text-muted"><strong>Importância:</strong> A infraestrutura da empresa utiliza vSphere. Entender VMs e praticar com virtualização local (ex: VirtualBox) é fundamental.</p>
+                            <h4>Tópicos de Estudo:</h4>
+                            <ul>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.3-item-0"><span>O que é Virtualização? Hypervisors (Tipo 1 vs. Tipo 2).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.3-item-1"><span>Ferramentas de Virtualização Desktop (VirtualBox, VMware Workstation/Player): Instalação, criação e configuração de VMs, redes virtuais (NAT, Bridge, Host-only, Internal), snapshots.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.3-item-2"><span>Componentes VMware vSphere (Visão Geral): ESXi, vCenter Server, VMs, Datastores, Redes Virtuais (vSwitches, Port Groups).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.3-item-3"><span>Benefícios da Virtualização: Otimização, isolamento, escalabilidade.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.3-item-4"><span>Ciclo de Vida de uma VM: Criação, snapshots, clonagem, migração (vMotion - conceitual).</span></label></li>
+                            </ul>
+                            <h4>Desafios Práticos:</h4>
+                            <ul>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.3-challenge-0"><span>Pesquisar e apresentar os principais componentes do vSphere e sua interação.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.3-challenge-1"><span>Planejamento conceitual de recursos para VMs em um host físico.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.3-challenge-2"><span>Comparar VM snapshot vs. clone: Propósitos e diferenças.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-1-topic-1.3-challenge-3"><span>Criar laboratório virtual com VirtualBox e OPNsense.</span></label>
+                                    <div class="challenge-details pl-4 text-sm text-muted">
+                                        <ul>
+                                            <li><span>Instalar VirtualBox.</span></li>
+                                            <li><span>Baixar ISO do OPNsense e de uma distribuição Linux leve.</span></li>
+                                            <li><span>Criar VM OPNsense (interface WAN e LAN).</span></li>
+                                            <li><span>Criar duas VMs Linux na rede LAN interna.</span></li>
+                                            <li><span>Configurar IP estático na LAN do OPNsense e servidor DHCP.</span></li>
+                                            <li><span>Configurar VMs Linux para obter IP via DHCP.</span></li>
+                                            <li><span>Testar conectividade interna e acesso à internet via OPNsense.</span></li>
+                                            <li><span>(Opcional) Configurar regras de firewall no OPNsense.</span></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-container mb-8" data-phase-id="2">
+                <div class="collapsible-header">
+                    <h2 class="text-xl font-semibold">Fase 2: Containers e Controle de Versão 🐳</h2>
+                    <span class="arrow-icon">&#9654;</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="progress-bar-container">
+                        <div id="phase-2-progress-bar" class="progress-bar">0%</div>
+                    </div>
+
+                    <div class="topic-container mt-5" data-topic-id="2.1">
+                        <div class="collapsible-header bg-indigo-50 hover:bg-indigo-100">
+                            <h3 class="text-lg font-medium">4. Containers com Docker e Docker Swarm 🐳</h3>
+                             <span class="arrow-icon text-indigo-600 text-sm">&#9654;</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p class="mb-2 text-sm text-muted"><strong>Importância:</strong> Docker simplifica o deploy e gerenciamento de aplicações. Docker Swarm oferece orquestração para múltiplos hosts Docker.</p>
+                            <h4>Tópicos de Estudo:</h4>
+                            <ul>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.1-item-0"><span>Containers vs. VMs: Diferenças e benefícios.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.1-item-1"><span>Arquitetura Docker: Engine, CLI, Imagens, Containers, Registries.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.1-item-2"><span>Dockerfile: Instruções (FROM, RUN, CMD, ENTRYPOINT, COPY, ADD, WORKDIR, EXPOSE, ENV, ARG, VOLUME).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.1-item-3"><span>Comandos Docker CLI: `build`, `run`, `ps`, `stop`, `rm`, `images`, `rmi`, `pull`, `push`, `logs`, `exec`, `volume ls/create/rm`, `network ls/create/rm`.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.1-item-4"><span>Docker Compose: Gerenciamento de aplicações multi-container.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.1-item-5"><span>Redes Docker: Bridge, host, overlay.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.1-item-6"><span>Volumes Docker: Persistência de dados.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.1-item-7"><span>Docker Swarm Mode: Conceitos (Nodes Manager/Worker, Services, Tasks), Escalabilidade, Rolling Updates, Secrets, Configs.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.1-item-8"><span>Comandos Swarm CLI: `docker swarm init/join`, `docker service create/ls/ps/update/rm/scale`.</span></label></li>
+                            </ul>
+                            <h4>Desafios Práticos:</h4>
+                            <ul>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.1-challenge-0"><span>Criar Dockerfile para uma aplicação simples (Python Flask ou Node.js Express).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.1-challenge-1"><span>Criar `docker-compose.yml` para aplicação com frontend web e backend de banco de dados.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.1-challenge-2"><span>Configurar Swarm multi-node (simulado em VMs) e implantar serviço. Praticar escalabilidade e rolling update.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.1-challenge-3"><span>Modificar aplicação para usar volumes Docker para dados persistentes.</span></label></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="topic-container mt-5" data-topic-id="2.2">
+                        <div class="collapsible-header bg-indigo-50 hover:bg-indigo-100">
+                            <h3 class="text-lg font-medium">5. Controle de Versão com Git e GitLab</h3>
+                             <span class="arrow-icon text-indigo-600 text-sm">&#9654;</span>
+                        </div>
+                        <div class="collapsible-content">
+                           <p class="mb-2 text-sm text-muted"><strong>Importância:</strong> Git é o padrão para versionamento, essencial para rastrear alterações e colaboração. GitLab oferece hospedagem e CI/CD.</p>
+                            <h4>Tópicos de Estudo:</h4>
+                            <ul>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.2-item-0"><span>O que é Controle de Versão? (Centralizado vs. Distribuído).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.2-item-1"><span>Fundamentos do Git: Repositório (`init`, `clone`), Staging Area (`add`), Commits (`commit`), Branches (`branch`, `checkout`, `merge`), Remotos (`remote add`, `push`, `pull`, `fetch`), Status e Histórico (`status`, `log`, `diff`).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.2-item-2"><span>Ignorando arquivos com `.gitignore`.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.2-item-3"><span>Tags Git (`git tag`).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.2-item-4"><span>Estratégias de Branching (Conceitual): Gitflow, GitHub Flow.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.2-item-5"><span>Conflitos de Merge: Compreensão e resolução.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.2-item-6"><span>Visão Geral do GitLab: Projetos, Grupos, Hospedagem de Repositórios, Issue Tracking (básico), Merge Requests.</span></label></li>
+                            </ul>
+                            <h4>Desafios Práticos:</h4>
+                            <ul>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.2-challenge-0"><span>Criar projeto no GitLab, clonar, adicionar projeto simples e praticar ciclo add/commit/push.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.2-challenge-1"><span>Praticar criação de branches (develop, feature), commits, push e Merge Request no GitLab. Simular e resolver conflito de merge.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-2-topic-2.2-challenge-2"><span>Colaboração Simulada (Opcional): Trabalhar no mesmo repositório com outro clone/usuário.</span></label></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-container mb-8" data-phase-id="3">
+                <div class="collapsible-header">
+                    <h2 class="text-xl font-semibold">Fase 3: Automação e CI/CD ⚙️</h2>
+                     <span class="arrow-icon">&#9654;</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="progress-bar-container">
+                        <div id="phase-3-progress-bar" class="progress-bar">0%</div>
+                    </div>
+
+                    <div class="topic-container mt-5" data-topic-id="3.1">
+                        <div class="collapsible-header bg-indigo-50 hover:bg-indigo-100">
+                            <h3 class="text-lg font-medium">6. GitLab CI/CD 🚀</h3>
+                            <span class="arrow-icon text-indigo-600 text-sm">&#9654;</span>
+                        </div>
+                        <div class="collapsible-content">
+                             <p class="mb-2 text-sm text-muted"><strong>Importância:</strong> Automatizar build, teste e deploy acelera entregas e aumenta a confiabilidade.</p>
+                            <h4>Tópicos de Estudo:</h4>
+                            <ul>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.1-item-0"><span>Conceitos de CI/CD: Integração Contínua, Entrega Contínua, Implantação Contínua.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.1-item-1"><span>Arquivo `.gitlab-ci.yml`: Sintaxe e estrutura (stages, jobs, script, image, services, artifacts, variables, cache, rules/only/except).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.1-item-2"><span>GitLab Runners: Tipos (Shared, Specific, Group), Tags, Executores (Shell, Docker, Kubernetes).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.1-item-3"><span>Pipelines, Stages, Jobs.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.1-item-4"><span>Variáveis: Predefinidas, Customizadas, Protegidas.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.1-item-5"><span>Artefatos e Cache.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.1-item-6"><span>Ambientes e Deployments.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.1-item-7"><span>Construção de Imagens Docker em Pipelines CI/CD.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.1-item-8"><span>Execução de Testes em Pipelines CI/CD.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.1-item-9"><span>Deployment em Docker Swarm via CI/CD (Conceitual/Scriptado).</span></label></li>
+                            </ul>
+                            <h4>Desafios Práticos:</h4>
+                            <ul>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.1-challenge-0"><span>Criar `.gitlab-ci.yml` para build de imagem Docker e execução de testes (linting).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.1-challenge-1"><span>Estender pipeline para incluir stage de deploy para Docker Swarm (usando `docker service update` ou script).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.1-challenge-2"><span>Modificar pipeline para ter comportamentos diferentes para branches `develop` e `main`.</span></label></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="topic-container mt-5" data-topic-id="3.2">
+                        <div class="collapsible-header bg-indigo-50 hover:bg-indigo-100">
+                           <h3 class="text-lg font-medium">7. Gerenciamento de Configuração com Ansible (Opcional)</h3>
+                           <span class="arrow-icon text-indigo-600 text-sm">&#9654;</span>
+                        </div>
+                        <div class="collapsible-content">
+                            <p class="mb-2 text-sm text-muted"><strong>Importância:</strong> Ansible automatiza configuração de servidores e deploy de aplicações de forma agentless.</p>
+                            <h4>Tópicos de Estudo:</h4>
+                            <ul>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.2-item-0"><span>O que é Gerenciamento de Configuração? Infraestrutura como Código.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.2-item-1"><span>Conceitos Ansible: Control Node, Managed Nodes, Inventário (estático, dinâmico), Módulos (ex: `apt`, `service`, `copy`, `template`, `docker_image`, `docker_service`), Playbooks, Plays, Tasks.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.2-item-2"><span>Variáveis Ansible, Facts, Variáveis Registradas.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.2-item-3"><span>Handlers, Templates (Jinja2).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.2-item-4"><span>Ansible Roles.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.2-item-5"><span>Ansible Vault (para segredos).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.2-item-6"><span>Comandos Ad-hoc.</span></label></li>
+                            </ul>
+                            <h4>Desafios Práticos:</h4>
+                            <ul>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.2-challenge-0"><span>Criar playbook Ansible para instalar Nginx em VM.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.2-challenge-1"><span>Playbook para instalar Nginx, copiar `index.html` customizado e garantir que serviço está ativo.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.2-challenge-2"><span>Playbook para criar usuário, adicionar a grupo e copiar chave SSH pública.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-3-topic-3.2-challenge-3"><span>(Avançado) Playbook para deploy de container Docker ou atualização de serviço Docker Swarm.</span></label></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="phase-container mb-8" data-phase-id="4">
+                <div class="collapsible-header">
+                    <h2 class="text-xl font-semibold">Fase 4: Operações e Troubleshooting Avançado 🛠️</h2>
+                     <span class="arrow-icon">&#9654;</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="progress-bar-container">
+                        <div id="phase-4-progress-bar" class="progress-bar">0%</div>
+                    </div>
+
+                    <div class="topic-container mt-5" data-topic-id="4.1">
+                        <div class="collapsible-header bg-indigo-50 hover:bg-indigo-100">
+                           <h3 class="text-lg font-medium">8. Metodologia de Troubleshooting e Casos Específicos 🔍</h3>
+                           <span class="arrow-icon text-indigo-600 text-sm">&#9654;</span>
+                        </div>
+                        <div class="collapsible-content">
+                             <p class="mb-2 text-sm text-muted"><strong>Importância:</strong> Falhas são inevitáveis. Uma abordagem sistemática para troubleshooting é uma habilidade essencial.</p>
+                            <h4>Processo Geral de Troubleshooting:</h4>
+                            <ul>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-4-topic-4.1-item-0"><span>1. Identificar o Problema: Mensagem de erro exata, comportamento esperado vs. real, início, escopo.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-4-topic-4.1-item-1"><span>2. Coletar Informações: Logs (aplicação, sistema), métricas (CPU, memória, disco, rede), configurações, status de serviços, ferramentas de rede (`ping`, `traceroute`, `curl -v`, `ss`).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-4-topic-4.1-item-2"><span>3. Formular Hipótese: Com base nas informações, qual a possível causa?</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-4-topic-4.1-item-3"><span>4. Testar Hipótese: Fazer uma alteração por vez, observar resultado.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-4-topic-4.1-item-4"><span>5. Iterar: Se incorreto, voltar ao passo 2 ou 3 com novas informações.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-4-topic-4.1-item-5"><span>6. Resolver e Documentar: Detalhar problema, passos e solução.</span></label></li>
+                            </ul>
+                            <h4>Troubleshooting Específico por Tecnologia (Estudo):</h4>
+                             <ul>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-4-topic-4.1-item-6"><span>Sistemas Linux: Serviço não inicia (`systemctl status`, `journalctl`), alto consumo de CPU/memória (`top`, `htop`).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-4-topic-4.1-item-7"><span>Redes: Falha de conexão a serviço/porta (`ss -tulnp`, firewall, `ping`, `traceroute`, `telnet`).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-4-topic-4.1-item-8"><span>Docker & Swarm: Container falhando (`docker logs`, `docker inspect`), tarefas de serviço Swarm pendentes/falhando (`docker service ps`).</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-4-topic-4.1-item-9"><span>GitLab & CI/CD: Falha em job de pipeline (logs do job), problemas com runner, erros de sintaxe no `.gitlab-ci.yml`.</span></label></li>
+                            </ul>
+                            <h4>Desafios Práticos (Cenários de Falha):</h4>
+                            <ul>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-4-topic-4.1-challenge-0"><span>Cenário 1 (Docker): Diagnosticar e corrigir Dockerfile com bug que impede container de iniciar.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-4-topic-4.1-challenge-1"><span>Cenário 2 (Rede/Firewall): No laboratório VirtualBox/OPNsense, diagnosticar e corrigir regra de firewall impedindo acesso.</span></label></li>
+                                <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-4-topic-4.1-challenge-2"><span>Cenário 3 (GitLab CI): Identificar e corrigir erro comum em arquivo `.gitlab-ci.yml`.</span></label></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="phase-container mb-8" data-phase-id="5">
+                <div class="collapsible-header">
+                    <h2 class="text-xl font-semibold">Desenvolvimento Contínuo e Habilidades Complementares 🌟</h2>
+                     <span class="arrow-icon">&#9654;</span>
+                </div>
+                <div class="collapsible-content">
+                     <p class="mb-3 text-description">Estas são práticas contínuas e habilidades importantes para o crescimento profissional.</p>
+                    <ul>
+                        <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-5-item-0"><span>Ler Documentação Técnica Regularmente</span></label></li>
+                        <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-5-item-1"><span>Manter a Curiosidade e Acompanhar Novas Tecnologias</span></label></li>
+                        <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-5-item-2"><span>Desenvolver Habilidades Analíticas e de Resolução de Problemas</span></label></li>
+                        <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-5-item-3"><span>Praticar Comunicação Clara e Eficaz (Técnica e Interpessoal)</span></label></li>
+                        <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-5-item-4"><span>Colaborar Efetivamente com a Equipe</span></label></li>
+                        <li class="checkbox-item"><label><input type="checkbox" data-item-id="phase-5-item-5"><span>Adotar a Filosofia de "Versionar Tudo" (Código, Configurações)</span></label></li>
+                    </ul>
+                     <div class="progress-bar-container mt-5">
+                        <div id="phase-5-progress-bar" class="progress-bar">0%</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+            collapsibleHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const arrow = header.querySelector('.arrow-icon');
+                    const isOpen = content.classList.contains('open');
+
+                    if (isOpen) {
+                        content.style.animation = 'fadeOut 0.2s forwards';
+                        setTimeout(() => {
+                            content.classList.remove('open');
+                            content.style.animation = ''; 
+                        }, 200);
+                    } else {
+                        content.classList.add('open');
+                        content.style.animation = 'fadeIn 0.4s ease-out';
+                    }
+                    
+                    if (arrow) {
+                        arrow.classList.toggle('rotate-90');
+                        arrow.innerHTML = content.classList.contains('open') && !isOpen ? '&#9660;' : '&#9654;';
+                    }
+                });
+            });
+            
+            const styleSheet = document.styleSheets[0];
+            try {
+                 styleSheet.insertRule(`
+                    @keyframes fadeOut {
+                        from { opacity: 1; transform: translateY(0); }
+                        to { opacity: 0; transform: translateY(-8px); }
+                    }`, styleSheet.cssRules.length);
+            } catch (e) {
+                console.warn("Could not insert CSS rule for fadeOut:", e);
+            }
+
+            checkboxes.forEach(checkbox => {
+                const itemId = checkbox.dataset.itemId;
+                if (localStorage.getItem(itemId) === 'true') {
+                    checkbox.checked = true;
+                }
+                checkbox.addEventListener('change', (event) => {
+                    localStorage.setItem(itemId, event.target.checked);
+                    updateProgress();
+                });
+            });
+
+            function updateProgress() {
+                let totalChecked = 0;
+                let totalCheckboxes = checkboxes.length;
+
+                checkboxes.forEach(cb => {
+                    if (cb.checked) {
+                        totalChecked++;
+                    }
+                });
+
+                const overallProgress = totalCheckboxes > 0 ? (totalChecked / totalCheckboxes) * 100 : 0;
+                const overallProgressBar = document.getElementById('overall-progress-bar');
+                overallProgressBar.style.width = overallProgress.toFixed(1) + '%';
+                overallProgressBar.textContent = overallProgress.toFixed(0) + '%';
+
+                const phaseContainers = document.querySelectorAll('.phase-container');
+                phaseContainers.forEach(phaseContainer => {
+                    const phaseId = phaseContainer.dataset.phaseId;
+                    if (!phaseId && phaseId !== "0") return; 
+
+                    const phaseCheckboxes = phaseContainer.querySelectorAll('input[type="checkbox"]');
+                    let phaseTotalChecked = 0;
+                    let phaseTotalCheckboxes = phaseCheckboxes.length;
+
+                    phaseCheckboxes.forEach(pcb => {
+                        if (pcb.checked) {
+                            phaseTotalChecked++;
+                        }
+                    });
+                    
+                    const phaseProgressBarElem = document.getElementById(`phase-${phaseId}-progress-bar`);
+                    if (phaseProgressBarElem) {
+                        const phaseProgress = phaseTotalCheckboxes > 0 ? (phaseTotalChecked / phaseTotalCheckboxes) * 100 : 0;
+                        phaseProgressBarElem.style.width = phaseProgress.toFixed(1) + '%';
+                        phaseProgressBarElem.textContent = phaseProgress.toFixed(0) + '%';
+                    }
+                });
+            }
+
+            updateProgress();
+            
+            const firstPhaseHeader = document.querySelector('.phase-container[data-phase-id="0"] .collapsible-header');
+            if (firstPhaseHeader) {
+                if (!firstPhaseHeader.nextElementSibling.classList.contains('open')) {
+                     // firstPhaseHeader.click(); // Descomente se quiser que a primeira fase abra por padrão
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
+
